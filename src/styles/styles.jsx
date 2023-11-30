@@ -18,6 +18,9 @@ const styles = StyleSheet.create({
     logo: {
         marginBottom: 18,
     },
+    logoMini: {
+        marginBottom: 36
+    },
     inputContainer: {
         width: '95%',
         alignItems: 'center',
@@ -34,6 +37,17 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         paddingHorizontal: 8,
     },
+    inputBig: {
+        width: '95%',
+        height: 60,
+        backgroundColor: colors['bg-color-2'],
+        color: '#fff',
+        marginBottom: 24,
+        borderRadius: 4,
+        paddingHorizontal: 8,
+        textAlign: 'center',
+    },
+
     btn: {
         width: '95%',
         height: 40,
@@ -46,6 +60,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         color: colors['bg-color']
+    },
+    title: {
+        color: colors['primary-color'],
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginBottom: 24
     }
 });
 
