@@ -27,13 +27,13 @@ export default function Signin() {
                 <TextInput
                     placeholder='Email'
                     style={styles.input}
-                    placeholderTextColor='#d9d9d9'
+                    placeholderTextColor={colors.coldWhite}
                     value={email}
                     onChangeText={setEmail} />
                 <TextInput
                     placeholder='Senha'
                     style={styles.input}
-                    placeholderTextColor='#d9d9d9'
+                    placeholderTextColor={colors.coldWhite}
                     secureTextEntry={true}
                     value={password}
                     onChangeText={setPassword} />
