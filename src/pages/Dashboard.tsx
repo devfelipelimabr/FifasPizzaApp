@@ -14,6 +14,8 @@ import { StackParamsList } from "../routes/auth.routes";
 
 import { AuthContext } from "../contexts/AuthContext";
 
+import { api } from "../services/api";
+
 import styles, { colors } from "../styles/styles";
 
 export default function Dashboard() {
@@ -23,17 +25,27 @@ export default function Dashboard() {
   const { signOut } = useContext(AuthContext);
   const [table, setTable] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   async function handleOpenTable() {
+    setLoading(true);
     const tableNumber = parseInt(table);
 
     if (!tableNumber || tableNumber < 1) {
-      return alert("Preencha um número de mesa válido");
+      alert("Preencha um número de mesa válido");
+      return setLoading(false);
     }
-    //Fazer requisição e ir para próxima tela
+
+    const response = await api.post("orders", {
+      table: tableNumber,
+    });
+
     navigation.navigate("Order", {
       number: tableNumber,
-      order_id: "0eb80895-7506-4adc-a738-f7b5b84bf311",
+      order_id: response.data.id,
     });
+    setTable("");
+    setLoading(false);
   }
 
   return (
@@ -50,7 +62,11 @@ export default function Dashboard() {
       />
 
       <TouchableOpacity style={styles.btn} onPress={handleOpenTable}>
-        <Text style={styles.btnText}>Abrir mesa</Text>
+        {loading ? (
+          <ActivityIndicator />
+        ) : (
+          <Text style={styles.btnText}>Abrir mesa</Text>
+        )}
       </TouchableOpacity>
     </SafeAreaView>
   );
