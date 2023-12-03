@@ -44,7 +44,7 @@ export function FinishOrder() {
       });
 
       alert("Pedido finalizado com sucesso!");
-      navigation.navigate("Dashboard");
+      navigation.popToTop();
     } catch (error) {
       alert(
         "Erro ao finalizar pedido. Ocorreu um erro ao finalizar o pedido. Tente novamente mais tarde."
