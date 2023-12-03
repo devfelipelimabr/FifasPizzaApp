@@ -61,7 +61,7 @@ export default function Dashboard() {
         onChangeText={setTable}
       />
 
-      <TouchableOpacity style={styles.btn} onPress={handleOpenTable}>
+      <TouchableOpacity style={styles.btn} onPress={handleOpenTable} disabled={loading}>
         {loading ? (
           <ActivityIndicator />
         ) : (
