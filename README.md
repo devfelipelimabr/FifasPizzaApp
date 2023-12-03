@@ -1,5 +1,3 @@
-Claro, aqui está um README básico para o app mobile do Fifas Pizza, baseado nas informações fornecidas:
-
 ```markdown
 # Mobile
 
