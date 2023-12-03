@@ -194,6 +194,10 @@ const styles = StyleSheet.create({
     select: {
         color: '#fff',
         textTransform: 'capitalize'
+    },featherImg:{
+        position: 'absolute',
+        top: '10%',
+        right:'5%'
     },
 });
 

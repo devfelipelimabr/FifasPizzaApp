@@ -8,6 +8,8 @@ import {
   ActivityIndicator,
 } from "react-native";
 
+import { Feather } from '@expo/vector-icons';
+
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StackParamsList } from "../routes/auth.routes";
@@ -50,6 +52,9 @@ export default function Dashboard() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <TouchableOpacity style={styles.featherImg} onPress={signOut}disabled={loading}>
+      <Feather name="log-out" size={32} color={colors["terciary-color"]}/>
+      </TouchableOpacity>
       <Image style={styles.logoMini} source={require("../assets/logo_2.png")} />
       <Text style={styles.title}>Novo pedido</Text>
       <TextInput
