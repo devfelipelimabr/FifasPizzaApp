@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 import styles from "../styles/styles";
@@ -10,9 +10,10 @@ import { ItemProps } from "../pages/Order";
 interface ListItemProps {
   data: ItemProps;
   deleteItem: (item_id: string) => void;
+  loading: boolean;
 }
 
-export default function ListItem({ data, deleteItem }: ListItemProps) {
+export default function ListItem({ data, deleteItem, loading }: ListItemProps) {
   function handleRemoveItem() {
     deleteItem(data.id);
   }
@@ -23,8 +24,12 @@ export default function ListItem({ data, deleteItem }: ListItemProps) {
         {data.amount} - {data.name}
       </Text>
 
-      <TouchableOpacity onPress={handleRemoveItem}>
-        <Feather name="trash-2" size={25} color={colors["terciary-color"]} />
+      <TouchableOpacity onPress={handleRemoveItem} disabled={loading}>
+        {loading ? (
+          <ActivityIndicator />
+        ) : (
+          <Feather name="trash-2" size={25} color={colors["terciary-color"]} />
+        )}
       </TouchableOpacity>
     </View>
   );

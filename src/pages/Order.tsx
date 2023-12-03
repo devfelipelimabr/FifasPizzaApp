@@ -12,8 +12,6 @@ import {
 import { Feather } from "@expo/vector-icons";
 
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { StackParamsList } from "../routes/auth.routes";
 
 import { api } from "../services/api";
 
@@ -180,8 +178,6 @@ export default function Order() {
       })
 
       setItems(removeItem)
-  
-      console.log(`Item ${item_id} deletado com sucesso!`);
     } catch (error) {
       alert(
         "Erro ao excluir item. Ocorreu um erro ao excluir o item do pedido. Tente novamente mais tarde."
@@ -292,7 +288,7 @@ export default function Order() {
         data={items}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <ListItem data={item} deleteItem={handleDeleteItem} />
+          <ListItem data={item} deleteItem={handleDeleteItem} loading={loading}/>
         )}
       />
 
