@@ -9,9 +9,12 @@ import {
   Modal,
   FlatList,
 } from "react-native";
+
 import { Feather } from "@expo/vector-icons";
 
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { StackParamsList } from "../routes/auth.routes";
 
 import { api } from "../services/api";
 
@@ -52,7 +55,8 @@ type OrderRouteProps = RouteProp<RouteDetailParams, "Order">;
 
 export default function Order() {
   const route = useRoute<OrderRouteProps>();
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<StackParamsList>>();
 
   const [categories, setCategories] = useState<CategoryProps[] | []>([]);
   const [categorySelected, setCategorySelected] = useState<CategoryProps>();
@@ -173,11 +177,11 @@ export default function Order() {
         },
       });
 
-      let removeItem = items.filter(item =>{
-        return(item.id !== item_id)
-      })
+      let removeItem = items.filter((item) => {
+        return item.id !== item_id;
+      });
 
-      setItems(removeItem)
+      setItems(removeItem);
     } catch (error) {
       alert(
         "Erro ao excluir item. Ocorreu um erro ao excluir o item do pedido. Tente novamente mais tarde."
@@ -187,8 +191,13 @@ export default function Order() {
       setLoading(false);
     }
   }
-  
-  
+
+  function handleFinishOrder() {
+    navigation.navigate("FinishOrder", {
+      number: route.params?.number,
+      order_id: route.params?.order_id,
+    });
+  }
 
   return (
     <SafeAreaView style={styles.containerTop}>
@@ -218,6 +227,7 @@ export default function Order() {
         <TouchableOpacity
           style={styles.input}
           onPress={() => setModalCategoryVisible(true)}
+          disabled={loading}
         >
           <Text style={styles.select}>{categorySelected?.name}</Text>
         </TouchableOpacity>
@@ -227,6 +237,7 @@ export default function Order() {
         <TouchableOpacity
           style={styles.input}
           onPress={() => setModalProductVisible(true)}
+          disabled={loading}
         >
           <Text style={styles.select}>{productSelected?.name}</Text>
         </TouchableOpacity>
@@ -260,7 +271,11 @@ export default function Order() {
         />
       </View>
       <View style={styles.actions}>
-        <TouchableOpacity style={styles.btnAdd} onPress={handleAdd}>
+        <TouchableOpacity
+          style={[styles.btnAdd, { opacity: loading ? 0.4 : 1 }]}
+          onPress={handleAdd}
+          disabled={loading}
+        >
           <Text style={styles.btnText}>+</Text>
         </TouchableOpacity>
 
@@ -269,14 +284,15 @@ export default function Order() {
             styles.btn,
             {
               width: "75%",
-              opacity: items.length === 0 ? 0.4 : 1,
+              opacity: items.length === 0 || loading ? 0.4 : 1,
               backgroundColor:
-                items.length === 0
+                items.length === 0 || loading
                   ? colors["terciary-color"]
                   : colors["primary-color"],
             },
           ]}
-          disabled={items.length === 0}
+          disabled={items.length === 0 || loading}
+          onPress={handleFinishOrder}
         >
           <Text style={styles.btnText}>Avançar</Text>
         </TouchableOpacity>
@@ -288,13 +304,17 @@ export default function Order() {
         data={items}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <ListItem data={item} deleteItem={handleDeleteItem} loading={loading}/>
+          <ListItem
+            data={item}
+            deleteItem={handleDeleteItem}
+            loading={loading}
+          />
         )}
       />
 
       <Modal
         transparent={true}
-        visible={modalCategoryVisible}
+        visible={modalCategoryVisible && !loading}
         animationType="fade"
       >
         <ModalPicker
@@ -306,7 +326,7 @@ export default function Order() {
 
       <Modal
         transparent={true}
-        visible={modalProductVisible}
+        visible={modalProductVisible && !loading}
         animationType="fade"
       >
         <ModalPicker

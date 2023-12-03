@@ -51,6 +51,14 @@ const styles = StyleSheet.create({
         padding: 12,
         marginBottom: 12,
     },
+    alertContainer: {
+        flex: 1,
+        backgroundColor: colors['bg-color'],
+        paddingVertical: '5%',
+        paddingHorizontal: '4%',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     qtdText: {
         color: '#fff',
         fontSize: 20,
@@ -93,7 +101,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textTransform: 'capitalize',
     },
-
     btn: {
         width: '95%',
         height: 40,
@@ -102,8 +109,32 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    btn2: {
+        flexDirection: 'row',
+        width: '65%',
+        height: 40,
+        backgroundColor: colors['primary-color'],
+        borderRadius: 4,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    btnAdd: {
+        width: '20%',
+        backgroundColor: colors['secondary-color'],
+        borderRadius: 4,
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     btnText: {
         fontSize: 18,
+        fontWeight: 'bold',
+        color: colors['bg-color'],
+        textTransform: 'capitalize',
+    },
+    btnTextRow: {
+        fontSize: 18,
+        marginRight: 8,
         fontWeight: 'bold',
         color: colors['bg-color'],
         textTransform: 'capitalize',
@@ -129,6 +160,13 @@ const styles = StyleSheet.create({
         marginRight: 14,
         textTransform: 'capitalize',
     },
+    title4: {
+        color: colors['primary-color'],
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 12,
+        textTransform: 'capitalize',
+    },
     header: {
         flexDirection: 'row',
         marginBottom: 12,
@@ -140,14 +178,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '95%',
         justifyContent: 'space-between'
-    },
-    btnAdd: {
-        width: '20%',
-        backgroundColor: colors['secondary-color'],
-        borderRadius: 4,
-        height: 40,
-        justifyContent: 'center',
-        alignItems: 'center'
     },
     option: {
         alignItems: 'flex-start',
